@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hime Style Page</title>
+
+<style>
+/* ===== 기본 ===== */
+body {
+  background: url('back.gif') no-repeat center/cover;
+  font-family: 'Comic Sans MS', 'Arial', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ===== 전체 박스 ===== */
+.container {
+  width: 850px;
+  margin: 30px auto;
+  background-color: #ffffff;
+  border: 3px dotted #f4a4c2;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255,182,193,0.5);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 헤더 ===== */
+.header {
+  background: #ffdff0;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 3px dotted #f4a4c2;
+  position: relative;
+}
+.header h1 {
+  color: #ff6ea8;
+}
+
+/* 리본 */
+.ribbon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 60px;
+  height: 60px;
+  background: url('h.gif') no-repeat center/contain;
+}
+
+/* ===== 프로필 영역 ===== */
+.profile-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  gap: 20px;
+}
+
+.profile-box {
+  width: 48%;
+  display: flex;
+  gap: 15px;
+  background: #fff7fc;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+/* 🌱 민트 (왼쪽) */
+.profile-box.mint {
+  border: 2px dashed #a9d9b8;
+  background: #f1fbf4;
+}
+
+/* 💗 핑크 (오른쪽) */
+.profile-box.pink {
+  flex-direction: row-reverse;
+  text-align: right;
+  border: 2px dashed #f4a4c2;
+}
+
+/* 이미지 공통 */
+.profile-box img {
+  width: 130px;
+  height: 130px;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 민트 이미지 */
+.profile-box.mint img {
+  border: 3px solid #bfe6cc;
+  box-shadow: 0 0 10px rgba(180,230,200,0.8);
+}
+
+/* 핑크 이미지 */
+.profile-box.pink img {
+  border: 3px solid #ffb6c1;
+  box-shadow: 0 0 10px #ffc0cb;
+}
+
+/* 호버 효과 */
+.profile-box img:hover,
+.gallery img:hover {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: 0 0 15px rgba(255,170,200,0.8);
+}
+
+/* 소개 텍스트 */
+.about h2 {
+  margin: 0;
+}
+.profile-box.mint .about h2 { color: #6bbf8e; }
+.profile-box.pink .about h2 { color: #ff6ea8; }
+
+/* 버튼 */
+.button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 민트 버튼 */
+.profile-box.mint .button {
+  background: #dff4e8;
+  border: 2px solid #a9d9b8;
+  color: #4f8f6b;
+}
+
+/* 핑크 버튼 */
+.profile-box.pink .button {
+  background: #ffc7da;
+  border: 2px solid #f4a4c2;
+  color: #555;
+}
+
+/* ===== 갤러리 ===== */
+.gallery-section {
+  padding: 20px;
+  border-top: 3px dotted #f4a4c2;
+}
+
+.gallery-section h3 {
+  text-align: center;
+  color: #ff6ea8;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gallery img {
+  width: 140px;
+  height: 140px;
+  margin: 10px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 3px solid #a4f4e4;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== 푸터 ===== */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: #ffdff0;
+  border-top: 3px dotted #f4a4c2;
+}
+
+/* ===== 하트 비 ===== */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: #ff6ea8;
+  animation: fall linear forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ===== 사진 위 하트 팡 ===== */
+.img-heart {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  animation: heartPop 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes heartPop {
+  0% { opacity: 1; transform: translate(-50%,0) scale(0.5); }
+  100% { opacity: 0; transform: translate(-50%,-25px) scale(1.4); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1> коренной житель </h1>
+    <div class="ribbon"></div>
+  </div>
+
+  <!-- 🔥 위치 변경 완료 -->
+  <div class="profile-wrap">
+
+    <!-- 🌱 민트 (왼쪽) -->
+    <div class="profile-box mint">
+      <img src="b.jpg">
+      <div class="about">
+        <h2>Б</h2>
+        <p>B</p>
+        <a class="button">☘️</a>
+      </div>
+    </div>
+
+    <!-- 💗 핑크 (오른쪽) -->
+    <div class="profile-box pink">
+      <img src="m.jpg">
+      <div class="about">
+        <h2>Мефистофель</h2>
+        <p>Mephisto</p>
+        <a class="button">🌷</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="gallery-section">
+    <h3>✦ Gallery ✦</h3>
+    <div class="gallery">
+      <img src="gg.gif">
+      <img src="169.gif">
+      <img src="ww.png">
+      <img src="251031_.jpg"> <br>
+      <img src="SPOILER_35._2.png">
+      <img src="50_5.gif">
+      <img src="ce857ccf5dbf5f2f.png">
+       <img src="b81dd0ad73511e9a.jpg"><br>
+       <img src="bb.jpg">
+       <img src="mm.jpg">
+       <img src="cc.gif">
+       <img src="66.jpg"><br>
+        <img src="2.jpg">
+         <img src="q.png">
+         
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Hime Page | Made with 💖
+  </div>
+
+</div>
+
+<script>
+/* 하트 비 */
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = '♥';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+  heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 300);
+
+/* 사진 위 하트 팡 */
+document.querySelectorAll(".profile-box img, .gallery img").forEach(img => {
+  img.addEventListener("mouseenter", () => {
+    const heart = document.createElement("div");
+    heart.className = "img-heart";
+    heart.textContent = "💗";
+    img.parentElement.style.position = "relative";
+    img.parentElement.appendChild(heart);
+    setTimeout(() => heart.remove(), 800);
+  });
+});
+</script>
+
+</body>
+</html>
